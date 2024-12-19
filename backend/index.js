@@ -8,18 +8,17 @@ dbConnect()
 
 const authRouter = require('./routes/auth.route')
 const superAdminRouter = require('./routes/superAdmin.route')
-const AdminRouter = require('./routes/admin.route')
+const adminRouter = require('./routes/admin.route')
+const employeeRouter = require('./routes/employee.route')
 
 
 app.use(cors())
 app.use(express.json())
 app.use('/admin/api/', authRouter)
 app.use('/super/admin/api/', superAdminRouter)
-app.use('/admin/api/', AdminRouter)
+app.use('/admin/api/', adminRouter)
+app.use('/employee/api/', employeeRouter)
 
-// app.get('/test',(req, res)=>{
-//     res.send("i am alive")
-// })
 
 
 

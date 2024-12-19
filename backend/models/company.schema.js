@@ -20,11 +20,13 @@ const companySchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+    },
+    phoneNumber: {
+        type: Number,
     },
     role: {
         type: String,
-        enum: ['super_admin', 'admin', 'employee', 'user']
+        enum: ['super_admin', 'admin', 'employee', 'client']
     },
     status: {
         type: String,
