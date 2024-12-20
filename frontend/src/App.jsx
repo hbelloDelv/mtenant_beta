@@ -15,6 +15,8 @@ import AdminDashboard from './components/AdminDashBoard/AdminDashboard';
 import FormEmployee from './components/AdminPages/FormEmployee';
 import EmployeeDashboard from './components/EmployeeDashboard/EmployeeDashboard';
 import FormClient from './components/EmployeePages/FormClient';
+import FormUpdateSuperAdmin from './components/SuperAdminPages/FormUpdateSuperAdmin';
+import FormUpdateCompanyProfile from './components/SuperAdminPages/FormUpdateCompanyProfile';
 
 function App() {
   return (
@@ -32,7 +34,9 @@ function App() {
                <Route index element={<FormCompanyProfile/>}></Route>
                <Route path="/super_admin/view_super_admins" element={ <ViewSuperAdmins />}></Route>
                <Route path="/super_admin/create_super_admin" element={ <FormSuperAdmin />}></Route>
+               <Route path="/super_admin/update_super_admins/:id" element={ <FormUpdateSuperAdmin  />}></Route>
                <Route path="/super_admin/view_registered_company" element={ <ViewRegisteredCompay />}></Route>
+               <Route path="/super_admin/update_registered_company/:id" element={ <FormUpdateCompanyProfile />}></Route>
           </Route>
 
         <Route
@@ -44,7 +48,11 @@ function App() {
             </PrivateRoute>
           }>
             <Route index element={<FormEmployee/>}></Route>
+
+            {/* add client form to admin */}
+            <Route path="create-client" element={<FormClient/>}></Route>
           </Route>
+
 
         <Route
           path="/employee" element={

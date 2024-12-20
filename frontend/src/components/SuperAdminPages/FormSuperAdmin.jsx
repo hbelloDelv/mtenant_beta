@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Avatar, Button, Grid2, Paper, TextField} from '@mui/material';
+import {Button, Grid2, Paper, TextField} from '@mui/material';
 import axios from 'axios'
 // import LoginIcon from '@mui/icons-material/Login';
 
@@ -36,8 +36,7 @@ const FormSuperAdmin = () => {
               headers: {
                 "x-company-id": 'company1',
                 "x-company-name": 'jamitan',
-                "company-name": 'Jamitan',
-                "role": 'super_admin',
+                "company-name": 'Jamitan'
               }
             }
           );

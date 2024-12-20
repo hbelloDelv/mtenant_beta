@@ -44,9 +44,9 @@ const AdminSideBar = () => {
       <ul style={{
         listStyle: 'none',
       }}>
-        <li><Link to="create_employee" style={sytleLinks}>Create Employee</Link></li>
+        <li><Link to="/admin" style={sytleLinks}>Create Employee</Link></li>
         <li><Link to="view_employee" style={sytleLinks}>View Employees</Link></li>
-        <li><Link to="/create_client" style={sytleLinks}>Create Client</Link></li>
+        <li><Link to="create-client" style={sytleLinks}>Create Client</Link></li> 
         <li><Link to="view_clients" style={sytleLinks}>View Clients</Link></li>
         <li><Link to="edit_profile" style={sytleLinks}>Edit Admin Profile</Link></li>
       </ul>
