@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const companySchema = require('../models/company.schema')
@@ -85,7 +86,7 @@ const viewEmployees = async (req, res) => {
         }
 
         
-        const allEmployee = await companyModel.find()
+        const allEmployee = await companyModel.find({role: "employee"})
         res.json(allEmployee)
 
     } catch (error) {
