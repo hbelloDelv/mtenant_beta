@@ -23,6 +23,7 @@ const companySchema = new mongoose.Schema({
     },
     phoneNumber: {
         type: Number,
+        default: 0
     },
     role: {
         type: String,
@@ -32,6 +33,15 @@ const companySchema = new mongoose.Schema({
         type: String,
         enum: ['active', 'suspended'],
         default: 'active'
+    },
+    landStatus: {
+        type: String,
+        enum: ['sold', 'unsold', 'not for sale', 'null'],
+        default: 'null'
+    },
+    plotId: {
+        type: Number,
+        default: 0
     },
     collectionName: {
         type: String,

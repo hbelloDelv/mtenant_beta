@@ -18,13 +18,21 @@ const GridItem = ({ user }) => {
     return (
       <Grid2 container spacing={16}>
         <React.Fragment>
+        <Grid2 item xs={12} sm={6}>
+            <Typography variant="h6">Phone number</Typography>
+            <Typography>{user.phoneNumber}</Typography>
+          </Grid2>
           <Grid2 item xs={12} sm={6}>
             <Typography variant="h6">Email</Typography>
             <Typography>{user.email}</Typography>
           </Grid2>
           <Grid2 item xs={12} sm={6}>
-            <Typography variant="h6">Status</Typography>
-            <Typography>{user.status}</Typography>
+            <Typography variant="h6">Plot ID</Typography>
+            <Typography>{user?.plotId !== null ? user.plotId : 'Not available'}</Typography>        
+          </Grid2>
+          <Grid2 item xs={12} sm={6}>
+            <Typography variant="h6">Land status</Typography>
+            <Typography>{user?.landStatus || 'Not available'}</Typography>
           </Grid2>
         </React.Fragment>
       </Grid2>
