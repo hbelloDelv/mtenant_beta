@@ -42,7 +42,7 @@ const EmployeeSideBar = () => {
         listStyle: 'none',
       }}>
         <li><Link to="/employee" style={sytleLinks}>Create Client</Link></li>
-        <li><Link to="view_client" style={sytleLinks}>View Clients</Link></li>
+        <li><Link to="view_clients" style={sytleLinks}>View Clients</Link></li>
         <li><Link to="update_profile" style={sytleLinks}>Update profile</Link></li>
       </ul>
     </Box>

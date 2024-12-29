@@ -44,50 +44,6 @@ const registerClient = async (req, res) => {
 
 
 
-// const viewClients = async (req, res) => {
-//     try {
-//         const collectionName = req.collectionName; // Access collectionName from middleware
-
-//         const token = req.headers.authorization?.split(" ")[1];
-
-//         if (!token) {
-//             return res.status(404).json({ success: false, error: "Token not provided" });
-//         }
-
-//         const decoded = jwt.verify(token, process.env.SECRET_KEY);
-//         if (!decoded) {
-//             return res.status(404).json({ success: false, error: "Token not valid" });
-//         }
-
-//         // Check if the collection exists in MongoDB
-//         const collections = await mongoose.connection.db.listCollections().toArray();
-//         const collectionExists = collections.some(col => col.name === collectionName);
-
-//         if (!collectionExists) {
-//             return res.status(404).json({ success: false, error: "Collection does not exist" });
-//         }
-
-//         const companyModel = mongoose.model(collectionName, companySchema, collectionName);
-
-//         const email = decoded.email;
-//         if (!email) {
-//             return res.status(400).json({ success: false, error: "Email not found in token" });
-//         }
-
-//         // Check if the user exists
-//         const user = await companyModel.findOne({ email });
-//         if (!user) {
-//             return res.status(404).json({ success: false, error: "User not found" });
-//         }
-
-//         // Fetch all employees with role 'client'
-//         const clients = await companyModel.find({ role: "client" });
-
-//         res.json( clients);
-//     } catch (error) {
-//         res.status(500).json({ success: false, message: error.message });
-//     }
-// };
 const viewClients = async (req, res) => {
     try {
         const collectionName = req.collectionName; // Access collectionName from middleware
@@ -305,45 +261,36 @@ const updateClient = async (req, res) => {
 
         const companyModel = mongoose.model(collectionName, companySchema, collectionName);
 
-        const user = await companyModel.findOne({ email }).select(
-            role === 'employee' 
-                ? '-landStatus -plotId' // Exclude these fields for employees
-                : '' // Include all fields for other roles
-        );
+        const user = await companyModel.findOne({ email });
 
         if (!user) {
             return res.status(404).json({ success: false, error: "User not found" });
         }
 
-        const { password, newPassword } = req.body;
+        const updateData = req.body;
 
-        if (!password || !newPassword) {
-            return res.status(400).json({ success: false, error: "Password and new password are required" });
+        // Prevent employees from updating restricted fields
+        if (role === 'employee') {
+            delete updateData.landStatus;
+            delete updateData.plotId;
         }
 
-        if (!user.password) {
-            console.error("Error: user.password is missing");
-            return res.status(500).json({ success: false, error: "Invalid user data" });
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return res.status(400).json({ success: false, error: "Current password is incorrect" });
-        }
-
-        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-
-              await companyModel.findOneAndUpdate(
+        // Update the user's data in the database
+        const updatedUser = await companyModel.findOneAndUpdate(
             { _id: req.params.id },
-            { $set: { ...req.body, password: hashedNewPassword } },
-            { new: true }
+            { $set: updateData },
+            { new: true } // Return the updated document
         ).select(
-            role === 'employee' 
+            role === 'employee'
                 ? '-landStatus -plotId' // Exclude these fields for employees in the updated data
                 : '' // Include all fields for other roles
         );
 
-        res.json({ success: true, message: 'Record updated successfully'});
+        if (!updatedUser) {
+            return res.status(404).json({ success: false, error: "Failed to update user" });
+        }
+
+        res.json({ success: true, message: 'Record updated successfully' });
     } catch (error) {
         console.error("Error in updateClient:", error.message);
         res.status(400).json({ message: error.message });

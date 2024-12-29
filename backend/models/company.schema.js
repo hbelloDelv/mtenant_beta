@@ -36,7 +36,7 @@ const companySchema = new mongoose.Schema({
     },
     landStatus: {
         type: String,
-        enum: ['sold', 'unsold', 'not for sale', 'null'],
+        enum: ['sold', 'unsold', 'Not for sale', 'null'],
         default: 'null'
     },
     plotId: {

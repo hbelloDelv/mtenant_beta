@@ -55,7 +55,7 @@ const AccordionWrapperEmployee = ({ user }) => {
                   </GridWrapper>
                 </AccordionDetails>
                 <Box display="flex" justifyContent="space-between" p={2}>
-                  <Link to={`/super_admin/update_super_admin/${item._id}`}>Edit</Link>
+                  <Link to={`/employee/update_client/${item._id}`}>Edit</Link>
                   <Link to={`/delete/${item._id}`}>Delete</Link>
                 </Box>
               </Accordion>

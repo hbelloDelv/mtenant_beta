@@ -18,6 +18,10 @@ import FormUpdateCompanyProfile from './components/SuperAdminPages/FormUpdateCom
 import ViewEmployee from './components/AdminPages/ViewEmployee';
 import ViewClient from './components/EmployeePages/ViewClient';
 import ViewRegisteredCompanies from './components/SuperAdminPages/ViewRegisteredCompanies';
+import FormUpdateClient from './components/EmployeePages/FormUpdateClient';
+import FormUpdateCLientByAdmin from './components/AdminPages/FormUpdateCLientByAdmin';
+import ViewClientByAdmin from './components/AdminPages/ViewClientByAdmin';
+
 
 function App() {
   return (
@@ -49,8 +53,10 @@ function App() {
             </PrivateRoute>
           }>
             <Route index element={<FormEmployee/>}></Route>
-            <Route path="/admin/view_employees" element={ <ViewEmployee />}></Route>
-            <Route path="view_clients" element={ <ViewClient />}></Route>
+            <Route path="view_employees" element={ <ViewEmployee />}></Route>
+            <Route path="view_clients" element={ <ViewClientByAdmin />}></Route>
+            <Route path="update_client/:id" element={ <FormUpdateCLientByAdmin   />}></Route>
+        
             {/* add client form to admin */}
             <Route path="create-client" element={<FormClient/>}></Route>
           </Route>
@@ -65,7 +71,8 @@ function App() {
             </PrivateRoute>
           }>
             <Route index element={<FormClient/>}></Route>
-            <Route path="/employee/view_client" element={ <ViewClient />}></Route>
+            <Route path="view_clients" element={ <ViewClient />}></Route>
+            <Route path="update_client/:id" element={ <FormUpdateClient />}></Route>
           </Route>
 
           <Route path="/unauthorized" element={<Unauthorized />}></Route>

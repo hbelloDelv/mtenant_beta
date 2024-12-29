@@ -15,26 +15,33 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 
 const GridItem = ({ user }) => {
-  return (
-    <Grid2 container spacing={16}>
-      <React.Fragment>
+    return (
+      <Grid2 container spacing={16}>
+        <React.Fragment>
         <Grid2 item xs={12} sm={6}>
-          <Typography variant="h6">Email</Typography>
-          <Typography>{user.email}</Typography>
-        </Grid2>
-        <Grid2 item xs={12} sm={6}>
-          <Typography variant="h6">Status</Typography>
-          <Typography>{user.status}</Typography>
-        </Grid2>
-      </React.Fragment>
-    </Grid2>
-  );
-};
+            <Typography variant="h6">Phone number</Typography>
+            <Typography>{user.phoneNumber}</Typography>
+          </Grid2>
+          <Grid2 item xs={12} sm={6}>
+            <Typography variant="h6">Email</Typography>
+            <Typography>{user.email}</Typography>
+          </Grid2>
+          <Grid2 item xs={12} sm={6}>
+            <Typography variant="h6">Plot ID</Typography>
+            <Typography>{user?.plotId !== null ? user.plotId : 'Not available'}</Typography>        
+          </Grid2>
+          <Grid2 item xs={12} sm={6}>
+            <Typography variant="h6">Land status</Typography>
+            <Typography>{user?.landStatus || 'Not available'}</Typography>
+          </Grid2>
+        </React.Fragment>
+      </Grid2>
+    );
+  };
 
 
-//Because of the links to delete and update, the accordion component is duplicate for each role
-// e.g Super Admin, Admin etc but the Grid the component is re use accross the component
-const AccordionWrapperAdmin = ({ user }) => {
+
+const AccordionWrapperClientForAdmin  = ({user}) => {
   return (
     <>
       {user.map((item) => (
@@ -54,7 +61,7 @@ const AccordionWrapperAdmin = ({ user }) => {
               </GridWrapper>
             </AccordionDetails>
             <Box display="flex" justifyContent="space-between" p={2}>
-              <Link to={`/admin/update_super_admin/${item._id}`}>Edit</Link>
+              <Link to={`/admin/update_client/${item._id}`}>Edit</Link>
               <Link to={`/delete/${item._id}`}>Delete</Link>
             </Box>
           </Accordion>
@@ -62,8 +69,7 @@ const AccordionWrapperAdmin = ({ user }) => {
       ))}
     </>
   );
-};
+}
 
 
-export default AccordionWrapperAdmin;
-
+export default AccordionWrapperClientForAdmin
